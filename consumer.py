@@ -1,4 +1,5 @@
 import pika, sys, os
+from decoder import *
 
 def main():
     parameters = pika.URLParameters('STRING_DE_CONECAO')
@@ -8,6 +9,8 @@ def main():
     def callback(ch, method, properties, body):
         print(" [x] Received %r" % body)
 
+        decoder(body)
+    
     channel.basic_consume(queue='teste', on_message_callback=callback, auto_ack=True)
 
     print(' [*] Waiting for messages. To exit press CTRL+C')

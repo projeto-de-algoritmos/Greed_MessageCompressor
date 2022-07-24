@@ -91,7 +91,7 @@ def huffman():
         test = test.replace(key,huffmanDict[key])
     # for key in huffmanDict:
     #     huffmanDict[key] = bitarray(huffmanDict[key])
-    huffmanDict["msg"]= test
+    huffmanDict["msg"] = test
     # dec = bitarray(test).decode(huffmanDict)
     # print(dec)
     # print(''.join(dec))
