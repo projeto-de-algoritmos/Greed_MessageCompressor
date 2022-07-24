@@ -1,4 +1,5 @@
 from bitarray import bitarray
+from publisher import sendMsgRabbitMq
 # A Huffman Tree Node
 class node:
 	def __init__(self, freq, symbol, left=None, right=None):
@@ -92,10 +93,11 @@ while len(nodes) > 1:
 huffmanDict = CreateHuffmanObject(nodes[0])
 for key in symFreqs:
     test = test.replace(key,huffmanDict[key])
-for key in huffmanDict:
-    huffmanDict[key] = bitarray(huffmanDict[key])
-# huffmanDict["msg"]= test
+# for key in huffmanDict:
+#     huffmanDict[key] = bitarray(huffmanDict[key])
+huffmanDict["msg"]= test
 print(huffmanDict)
-dec = bitarray(test).decode(huffmanDict)
-print(dec)
-print(''.join(dec))
+# dec = bitarray(test).decode(huffmanDict)
+# print(dec)
+# print(''.join(dec))
+sendMsgRabbitMq("teste",huffmanDict)
