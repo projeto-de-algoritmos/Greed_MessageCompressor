@@ -19,43 +19,33 @@ class node:
 # utility function to print huffman
 # codes for all symbols in the newly
 # created Huffman tree
-huffmanObject = {}
-
-def CreateHuffmanObject(node, val=''):
+def CreateHuffmanObject(node, val='',huffmanObject={}):
+    
 	# huffman code for current node
 	newVal = val + str(node.huff)
-	
-
-	# if node is not an edge node
-	# then traverse inside it
 	if(node.left):
-		CreateHuffmanObject(node.left, newVal)
+		CreateHuffmanObject(node.left, newVal,huffmanObject)
 	if(node.right):
-		CreateHuffmanObject(node.right, newVal)
+		CreateHuffmanObject(node.right, newVal,huffmanObject)
 
-		# if node is edge node then
-		# display its huffman code
 	if(not node.left and not node.right):
 		print(f"{node.symbol} -> {newVal}")
 		huffmanObject[node.symbol] = newVal
 	return huffmanObject
 
-def huffman():
-    test =  "Bylly!"
+def huffman(body):
     symFreqs = {}
 
-    for c in test:
+    for c in body:
         symFreqs[c] = 0
-    for c in test:
+    for c in body:
         symFreqs[c] = symFreqs[c] + 1
     chars = []
-    print(symFreqs)
     # Get keys of object
     for key in symFreqs:
         chars.append(key)
     # frequency of characters
     freq = list(symFreqs.values())
-
     # list containing unused nodes
     nodes = []
 
@@ -86,13 +76,9 @@ def huffman():
         nodes.remove(left)
         nodes.remove(right)
         nodes.append(newNode)
-    huffmanDict = CreateHuffmanObject(nodes[0])
+    huffmanObject={}
+    huffmanDict = CreateHuffmanObject(nodes[0],"",huffmanObject)
     for key in symFreqs:
-        test = test.replace(key,huffmanDict[key])
-    # for key in huffmanDict:
-    #     huffmanDict[key] = bitarray(huffmanDict[key])
-    huffmanDict["msg"] = test
-    # dec = bitarray(test).decode(huffmanDict)
-    # print(dec)
-    # print(''.join(dec))
+        body = body.replace(key,huffmanDict[key])
+    huffmanDict["msg"] = body
     return huffmanDict
