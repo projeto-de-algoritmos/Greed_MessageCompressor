@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  consumer:
+      build: .
+      container_name: consumer
+      command: ["sleep","100000"] 
+      networks:
+        - network
+  api:
+      build: .
+      container_name: api_producer
+      ports:
+        - 8081:8081
+      entrypoint: ["python", "main.py"] 
+networks:
+  network: {}
